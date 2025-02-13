@@ -1,7 +1,7 @@
 import swagger from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import mongoose from "mongoose";
-import { apiV1 } from "./routes/api/v1";
+import { apiV1 } from "@/routes/api/v1";
 
 mongoose.connect(Bun.env.MONGO_URL)
 
