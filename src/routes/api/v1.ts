@@ -1,10 +1,10 @@
+import { auth } from "@/controllers/v1/auth";
 import Elysia from "elysia";
 
 const apiV1 = new Elysia()
   .group("/api/v1", (app) =>
-    app.get("/hello", () => {
-      return { message: "Hello, World!" };
-    })
+    app
+      .use(auth)
   )
 
 export { apiV1 };
