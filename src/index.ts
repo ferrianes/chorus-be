@@ -1,9 +1,11 @@
 import swagger from "@elysiajs/swagger";
 import { Elysia } from "elysia";
+import mongoose from "mongoose";
+
+mongoose.connect(Bun.env.MONGO_URL)
 
 const app = new Elysia()
   .use(swagger())
-  .get("/", () => "Hello Elysia")
   .listen(3000);
 
 console.log(
