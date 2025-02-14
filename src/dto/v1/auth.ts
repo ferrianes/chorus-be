@@ -10,6 +10,10 @@ const authDTO = new Elysia().model({
       minLength: 8,
     }),
   }),
+  login: t.Object({
+    email: t.String(),
+    password: t.String(),
+  }),
 })
 
 export { authDTO };
