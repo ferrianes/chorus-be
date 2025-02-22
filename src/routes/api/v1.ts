@@ -6,6 +6,14 @@ const apiV1 = new Elysia()
   .group("/api/v1", (app) =>
     app
       .use(cors())
+      .onError(({ code, error }) => {
+        if (code === 'VALIDATION')
+          return {
+            status: 'fail',
+            code: error.code,
+            message: error.message
+          }
+      })
       .use(auth)
   )
 

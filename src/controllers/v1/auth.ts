@@ -2,6 +2,7 @@ import Elysia from "elysia";
 import { authDTO } from "@/dto/v1/auth";
 import { User } from "@/models/v1/user";
 import { jwt } from "@/plugins/jwt";
+import { MongoError } from 'mongodb';
 
 const auth = new Elysia()
   .use(authDTO)
@@ -21,10 +22,18 @@ const auth = new Elysia()
         }
       }
       catch (err) {
+        if ((err as MongoError).code === 11000)
+          return error(422, {
+            status: 'fail',
+            code: 'VALIDATION',
+            message: 'Email already exists!'
+          })
+
         return error(500, {
           status: 'fail',
           code: 'INTERNAL_SERVER_ERROR',
-          message: 'Oops! Something went wrong!'
+          message: 'Oops! Something went wrong!',
+          asd: err
         })
       }
     }, {
