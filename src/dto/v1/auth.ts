@@ -16,8 +16,12 @@ const authDTO = new Elysia().model({
     }),
   }),
   login: t.Object({
-    email: t.String(),
-    password: t.String(),
+    email: t.String({
+      error: 'Invalid email'
+    }),
+    password: t.String({
+      error: 'Invalid password'
+    }),
   }),
 })
 
